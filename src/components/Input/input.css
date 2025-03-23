@@ -1,0 +1,79 @@
+.inputContainer {
+    position: relative;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.iconContainer {
+    position: absolute;
+    left: 10px;
+    pointer-events: none;
+    z-index: 1;
+    margin-top: 13px;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    padding: 15px 15px 10px 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #4d90fe;
+}
+
+.inputError {
+    border-color: red;
+}
+
+.errorText {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+    padding-left: 10px;
+    margin-bottom: -10px;
+}
+
+.inputWrapper label {
+    position: absolute;
+    left: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    line-height: 20px;
+    color: black;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background-color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.inputWrapper input:focus + label,
+.inputWrapper input:not(:placeholder-shown) + label {
+    top: 0;
+    left: 10px;
+    font-size: 13px;
+    color: #4d90fe;
+}
+
+.requiredAsterisk {
+    color: red;
+    font-size: 16px;
+    position: absolute;
+    top: 40%;
+    right: -3px;
+    transform: translateY(-50%);
+    background-color: white;
+}

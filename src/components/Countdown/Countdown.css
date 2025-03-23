@@ -1,0 +1,26 @@
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .countdown-item {
+    text-align: center;
+  }
+  
+  .time {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 8px;
+    width: 40px;
+  }
+  
+  .label {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #333;
+  }
+  

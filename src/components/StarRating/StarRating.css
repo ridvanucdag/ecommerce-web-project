@@ -1,0 +1,75 @@
+:root {
+    --star-size: 1.15em;
+    --star-color: #e4e5e9;
+    --star-active-color: #ffc107;
+    --rating-text-color: #2d2d2d;
+    --star-gap: 0.1em;
+  }
+  
+  .star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--star-gap);
+    font-size: 1rem;
+    line-height: 1;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  .star-rating .filled-star,
+  .star-rating .empty-star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--star-size);
+    height: var(--star-size);
+    font-size: calc(var(--star-size) * 0.9);
+    color: transparent;
+    position: relative;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .star-rating .filled-star::before,
+  .star-rating .empty-star::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+  }
+  
+  .star-rating .filled-star {
+    color: var(--star-active-color);
+  }
+  
+  .star-rating .filled-star::before {
+    content: '★';
+    text-shadow: 0 2px 4px rgba(255, 193, 7, 0.2);
+  }
+  
+  .star-rating .empty-star::before {
+    content: '☆';
+    color: var(--star-color);
+  }
+
+  @keyframes star-pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    90% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  .star-rating .filled-star {
+    animation: star-pop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1) both;
+  }
+
+  @media (max-width: 768px) {
+    .star-rating {
+      font-size: 0.9rem;
+    }
+  }
+  @media (prefers-contrast: more) {
+    .star-rating .filled-star::before {
+      text-shadow: 0 0 2px rgba(0,0,0,0.3);
+    }
+  }

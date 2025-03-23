@@ -1,0 +1,132 @@
+
+.category__container {
+    margin: 0 auto;
+    padding: 10px 100px;
+  }
+  
+  .category__header {
+    text-align: center;
+    position: relative;
+  }
+  
+  .header__back-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: opacity 0.3s ease;
+  }
+  
+  .header__back-button:hover {
+    opacity: 0.7;
+  }
+  
+  .header__title {
+    font-size: 2.5rem;
+    text-transform: capitalize;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  
+  .header__product-count {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    letter-spacing: 1px;
+  }
+  
+  .category__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+  
+  .category__empty {
+    text-align: center;
+    padding: 4rem 0;
+  }
+  
+  .category__empty h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .category__empty p {
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .empty__cta {
+    background-color: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .empty__cta:hover {
+    background-color: #333;
+  }
+  
+  .category__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    padding: 2rem;
+  }
+  
+  .error__content {
+    text-align: center;
+    max-width: 500px;
+  }
+  
+  .error__content h2 {
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+  }
+  
+  .error__retry {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .error__retry:hover {
+    background-color: #c0392b;
+  }
+  
+  @media (max-width: 768px) {
+    .category__container {
+      padding: 1rem;
+    }
+  
+    .header__title {
+      font-size: 2rem;
+    }
+  
+    .category__grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header__back-button {
+      position: static;
+      transform: none;
+      margin-bottom: 1rem;
+    }
+  }

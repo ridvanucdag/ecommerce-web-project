@@ -1,0 +1,39 @@
+.homepage-container {
+    padding: 10px 100px;
+    margin: 0 auto;
+  }
+  
+  .hero-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .slider-container {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 768px) {
+    .homepage-container {
+      padding: 0 20px;
+    }
+    .hompage-menu{
+      display: none;
+    }
+    .hero-section {
+      flex-direction: column;
+    }
+    
+    .slider-container {
+      width: 100%;
+      flex: none;
+      border-radius: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .homepage-container {
+      padding: 0;
+    }
+  }

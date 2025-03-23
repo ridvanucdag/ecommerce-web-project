@@ -1,0 +1,190 @@
+:root {
+    --primary-color: #2a2a72;
+    --secondary-color: #009ffd;
+    --text-color: #333;
+    --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .not-found-container {
+    display: grid;
+    place-items: center;
+    background: var(--background-gradient);
+    padding: 2rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  
+  .content-wrapper {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(10px);
+  }
+  
+  .number-container {
+    margin: -120px 0 -100px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .number-animation {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .number-animation .text {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-dasharray: 6% 29%;
+    stroke-width: 3px;
+    animation: stroke-animation 5.5s infinite linear;
+  }
+  
+  @keyframes stroke-animation {
+    100% {
+      stroke-dashoffset: -35%;
+    }
+  }
+  
+  .notfound-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .description {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .home-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .home-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: 0.5s;
+  }
+  
+  .home-button:hover::before {
+    left: 100%;
+  }
+  
+  .home-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .button-text {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  .button-icon {
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+  }
+  
+  .home-button:hover .button-icon {
+    transform: translateX(5px);
+  }
+  
+  .support-text {
+    margin-top: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .contact-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-link:hover {
+    color: var(--primary-color);
+  }
+  
+  @media (max-width: 768px) {
+    .content-wrapper {
+      padding: 1.5rem;
+      margin: 0 1rem;
+    }
+  
+    .notfound-title {
+      font-size: 2rem;
+    }
+  
+    .description {
+      font-size: 1rem;
+    }
+  
+    .number-container {
+      margin: -100px 0 -30px;
+    }
+  
+    .number-animation {
+      height: 150px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .notfound-title {
+      font-size: 1.75rem;
+    }
+  
+    .home-button {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  
+    .number-animation {
+      height: 120px;
+    }
+  }
+  
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  .number-container {
+    animation: float 5s ease-in-out infinite;
+  }
