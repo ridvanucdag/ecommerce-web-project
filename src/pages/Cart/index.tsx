@@ -11,6 +11,7 @@ import {
 import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import LazyImage from "../../components/LazzyImage";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -98,8 +99,10 @@ const Cart = () => {
           {cart?.products?.map((product) => (
             <div key={product?.id} className="cart-item">
               <div className="cart-item-image-container">
-                <img
+                <LazyImage
                   src={product?.thumbnail}
+                  height={120}
+                  width="100%"
                   alt={product?.title}
                   className="cart-item-image"
                 />
