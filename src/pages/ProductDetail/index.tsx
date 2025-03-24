@@ -11,56 +11,64 @@ import { getParsedItem } from "../../providers/localStorage/localStorageService"
 import { StorageKeys } from "../../providers/localStorage/localStorage.types";
 import { AuthSignUpResponse } from "../../requests/auth/auth.types";
 import { useTranslation } from "react-i18next";
+import LazyImage from "../../components/LazzyImage";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const productId = Number(id) || 0;
   const { t } = useTranslation();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [profile, setProfile] = useState<AuthSignUpResponse | null>(null);
   const { data: product, isLoading } = useSingleProductQuery(productId);
   const [mainImage, setMainImage] = useState<string>("");
-    const { mutate } = useAddToCartMutation();
+  const { mutate } = useAddToCartMutation();
 
-    useEffect(() => {
-      if (product?.images?.length) {
-        setMainImage(product.images[0]);
-      } else {
-        setMainImage("../../assets/image/noimage.jpg");
-      }
-    }, [product]);
+  useEffect(() => {
+    if (product?.images?.length) {
+      setMainImage(product.images[0]);
+    } else {
+      setMainImage("../../assets/image/noimage.jpg");
+    }
+  }, [product]);
 
-    useEffect(() => {
-      const profileData = getParsedItem<AuthSignUpResponse>(
-        StorageKeys.Profile
-      );
-      if (profileData) {
-        setProfile(profileData);
-      }
-    }, []);
+  useEffect(() => {
+    const profileData = getParsedItem<AuthSignUpResponse>(StorageKeys.Profile);
+    if (profileData) {
+      setProfile(profileData);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   if (isLoading) return <Loading />;
-  if (!product) return <div className="error">{t('product.notFound')}</div>;
+  if (!product) return <div className="error">{t("product.notFound")}</div>;
 
-    const handleAddToCart = (e: React.MouseEvent) => {
-      e.stopPropagation();
-      if (profile) {
-        mutate({
-          userId: profile?.id,
-          products: [{ id: productId, quantity: 1 }],
-        } as unknown as void);
-      }
-    };
-
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (profile) {
+      mutate({
+        userId: profile?.id,
+        products: [{ id: productId, quantity: 1 }],
+      } as unknown as void);
+    }
+  };
+  const imageHeight = windowWidth >= 480 ? 420 : 340;
   return (
     <div className="product-detail">
       <div className="product-main">
         <div className="product-gallery">
           <div className="main-image-wrapper">
-            <img
+            <LazyImage
               src={mainImage}
               alt={product?.title}
+              height={imageHeight}
+              width="100%"
               className="main-image"
-              loading="lazy"
             />
             {product?.discountPercentage > 0 && (
               <span className="discount-badge">
@@ -79,11 +87,12 @@ const ProductDetail: React.FC = () => {
                 }`}
                 aria-label={`Resim ${index + 1}`}
               >
-                <img
+                <LazyImage
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
+                  width={80}
+                  height={70}
                   className="thumbnail-image"
-                  loading="lazy"
                 />
               </Button>
             ))}
@@ -108,7 +117,11 @@ const ProductDetail: React.FC = () => {
             <div className="rating-stock">
               <StarRating rating={product?.rating} />
               <div className="stock-info">
-                <span className={`stock ${product?.stock > 0 ? "in-stock" : "out-stock"}`}>
+                <span
+                  className={`stock ${
+                    product?.stock > 0 ? "in-stock" : "out-stock"
+                  }`}
+                >
                   {product?.stock > 0 ? `${product?.stock} Adet` : "Stokta Yok"}
                 </span>
                 {product?.availabilityStatus && (
@@ -118,7 +131,8 @@ const ProductDetail: React.FC = () => {
                 )}
                 {product?.minimumOrderQuantity > 1 && (
                   <span className="min-order">
-                    {t('product.minOrderQuantity')} {product?.minimumOrderQuantity}
+                    {t("product.minOrderQuantity")}{" "}
+                    {product?.minimumOrderQuantity}
                   </span>
                 )}
               </div>
@@ -138,7 +152,7 @@ const ProductDetail: React.FC = () => {
               )}
             </div>
             <div className="payment-info">
-              <span className="tax-info">{t('product.taxIncluded')}</span>
+              <span className="tax-info">{t("product.taxIncluded")}</span>
               {product?.shippingInformation && (
                 <span className="shipping-info">
                   🚚 {product?.shippingInformation}
@@ -148,29 +162,29 @@ const ProductDetail: React.FC = () => {
           </div>
           <Button className="add-to-cart" onClick={handleAddToCart}>
             <span className="cart-icon">🛒</span>
-            {t('product.addToCart')}
+            {t("product.addToCart")}
           </Button>
         </div>
       </div>
       <div className="product-specs">
         <div className="specs-section">
-          <h2 className="specs-title">{t('product.description')}</h2>
+          <h2 className="specs-title">{t("product.description")}</h2>
           <p className="specs-text">{product?.description}</p>
         </div>
 
         <div className="specs-grid">
           <div className="specs-group">
-            <h3 className="specs-subtitle">{t('product.technicalSpecs')}</h3>
+            <h3 className="specs-subtitle">{t("product.technicalSpecs")}</h3>
             <div className="specs-column">
               {product?.weight && (
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.weight')}</span>
+                  <span className="spec-label">{t("product.weight")}</span>
                   <span className="spec-value">{product?.weight} kg</span>
                 </div>
               )}
               {product?.dimensions && (
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.dimensions')}</span>
+                  <span className="spec-label">{t("product.dimensions")}</span>
                   <span className="spec-value">
                     {product?.dimensions?.width}x{product?.dimensions?.height}x
                     {product?.dimensions?.depth} cm
@@ -179,55 +193,69 @@ const ProductDetail: React.FC = () => {
               )}
               {product?.sku && (
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.sku')}</span>
+                  <span className="spec-label">{t("product.sku")}</span>
                   <span className="spec-value">{product?.sku}</span>
                 </div>
               )}
             </div>
           </div>
           <div className="specs-group">
-            <h3 className="specs-subtitle">{t('product.policies')}</h3>
+            <h3 className="specs-subtitle">{t("product.policies")}</h3>
             <div className="specs-column">
               {product.shippingInformation && (
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.shippingInformation')}</span>
-                  <span className="spec-value">{product?.shippingInformation}</span>
+                  <span className="spec-label">
+                    {t("product.shippingInformation")}
+                  </span>
+                  <span className="spec-value">
+                    {product?.shippingInformation}
+                  </span>
                 </div>
               )}
               {product?.returnPolicy && (
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.returnPolicy')}</span>
+                  <span className="spec-label">
+                    {t("product.returnPolicy")}
+                  </span>
                   <span className="spec-value">{product?.returnPolicy}</span>
                 </div>
               )}
               {product?.warrantyInformation && (
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.warrantyInformation')}</span>
-                  <span className="spec-value">{product?.warrantyInformation}</span>
+                  <span className="spec-label">
+                    {t("product.warrantyInformation")}
+                  </span>
+                  <span className="spec-value">
+                    {product?.warrantyInformation}
+                  </span>
                 </div>
               )}
             </div>
           </div>
           {product?.meta && (
             <div className="specs-group">
-              <h3 className="specs-subtitle">{t('product.productId')}</h3>
+              <h3 className="specs-subtitle">{t("product.productId")}</h3>
               <div className="specs-column">
                 {product?.meta?.barcode && (
                   <div className="spec-item">
-                    <span className="spec-label">{t('product.barcode')}</span>
+                    <span className="spec-label">{t("product.barcode")}</span>
                     <span className="spec-value">{product?.meta?.barcode}</span>
                   </div>
                 )}
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.createdAt')}</span>
+                  <span className="spec-label">{t("product.createdAt")}</span>
                   <span className="spec-value">
-                    {new Date(product.meta.createdAt).toLocaleDateString('tr-TR')}
+                    {new Date(product.meta.createdAt).toLocaleDateString(
+                      "tr-TR"
+                    )}
                   </span>
                 </div>
                 <div className="spec-item">
-                  <span className="spec-label">{t('product.updatedAt')}</span>
+                  <span className="spec-label">{t("product.updatedAt")}</span>
                   <span className="spec-value">
-                    {new Date(product?.meta?.updatedAt).toLocaleDateString('tr-TR')}
+                    {new Date(product?.meta?.updatedAt).toLocaleDateString(
+                      "tr-TR"
+                    )}
                   </span>
                 </div>
               </div>
@@ -237,7 +265,7 @@ const ProductDetail: React.FC = () => {
       </div>
       <div className="product-reviews">
         <h2 className="reviews-title">
-        {t('product.reviews')} ({product?.reviews?.length || 0})
+          {t("product.reviews")} ({product?.reviews?.length || 0})
         </h2>
 
         {product?.reviews?.length > 0 ? (
@@ -246,7 +274,9 @@ const ProductDetail: React.FC = () => {
               <div key={index} className="review-card">
                 <div className="review-header">
                   <div className="reviewer-info">
-                    <span className="reviewer-name">{review?.reviewerName}</span>
+                    <span className="reviewer-name">
+                      {review?.reviewerName}
+                    </span>
                     <span className="review-date">
                       {new Date(review?.date).toLocaleDateString("tr-TR")}
                     </span>
@@ -258,9 +288,7 @@ const ProductDetail: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="no-reviews">
-            {t('product.noReviews')}
-          </div>
+          <div className="no-reviews">{t("product.noReviews")}</div>
         )}
       </div>
     </div>

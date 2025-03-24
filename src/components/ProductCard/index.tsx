@@ -8,7 +8,7 @@ import { StorageKeys } from "../../providers/localStorage/localStorage.types";
 import { formatPrice } from "../../utils/helpers";
 import { ProductCardProps } from "./ProductCart.type";
 import Button from "../Button";
-
+import LazyImage from "../LazzyImage";
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -17,9 +17,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { mutate } = useAddToCartMutation();
 
   useEffect(() => {
-    const profileData = getParsedItem<AuthSignUpResponse>(
-      StorageKeys.Profile
-    );
+    const profileData = getParsedItem<AuthSignUpResponse>(StorageKeys.Profile);
     if (profileData) {
       setProfile(profileData);
     }
@@ -47,13 +45,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="product-card" onClick={handleClick}>
       <div className="product-image-container">
-        <img
+        <LazyImage
           src={product?.images?.[0]}
           alt={product?.title}
-          className="product-image"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = "/fallback-image.jpg";
-          }}
+          width={200}
+          height={200}
+          className="image-container"
         />
         <div className="product-badges">
           <div className="rating-badge">⭐ {product.rating}</div>

@@ -5,10 +5,12 @@ import "./ImageSlider.css";
 import { Product } from "../../requests/products/product.types";
 import { SlideImage } from "./ImageSlider.type";
 import Button from "../Button";
+import LazyImage from "../LazzyImage";
 
 const ImageSlider: React.FC<{ products: Product[] }> = memo(({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
 
   const images = React.useMemo(
@@ -22,6 +24,13 @@ const ImageSlider: React.FC<{ products: Product[] }> = memo(({ products }) => {
       ),
     [products]
   );
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (!isHovered && images?.length > 1) {
@@ -49,6 +58,7 @@ const ImageSlider: React.FC<{ products: Product[] }> = memo(({ products }) => {
     },
     [navigate]
   );
+  const imageHeight = windowWidth >= 768 ? 430 : 300;
 
   if (!images.length) return null;
 
@@ -66,6 +76,7 @@ const ImageSlider: React.FC<{ products: Product[] }> = memo(({ products }) => {
           <LazySlide
             key={`${image?.productId}-${index}`}
             image={image}
+            height={imageHeight}
             isActive={index === currentIndex}
             onClick={handleImageClick}
           />
@@ -95,17 +106,21 @@ const LazySlide = memo(
   ({
     image,
     isActive,
+    height,
     onClick,
   }: {
     image: SlideImage;
     isActive: boolean;
+    height: number;
     onClick: (id: number) => void;
   }) => (
     <div className={`slide ${isActive ? "active" : ""}`}>
-      <img
+      <LazyImage
         src={image?.src}
         alt={image?.alt}
-        loading="lazy"
+        className="lazy-slide-image"
+        height={height}
+        width="100%"
         onClick={() => onClick(image?.productId)}
       />
       {isActive && (
