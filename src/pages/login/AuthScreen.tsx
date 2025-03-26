@@ -121,13 +121,13 @@ function AuthScreen() {
         <div className="auth-header">
           <div className="toggle-container">
             <Button
-              className={`toggle-button ${isLogin ? "active" : ""}`}
+              className={`login-toggle-button ${isLogin ? "active" : ""}`}
               onClick={() => setIsLogin(true)}
             >
               {t("auth.login")}
             </Button>
             <Button
-              className={`toggle-button ${!isLogin ? "active" : ""}`}
+              className={`login-toggle-button ${!isLogin ? "active" : ""}`}
               onClick={() => setIsLogin(false)}
             >
               {t("auth.register")}

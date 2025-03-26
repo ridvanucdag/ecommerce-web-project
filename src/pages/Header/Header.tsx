@@ -15,7 +15,6 @@ import {
 import { AuthSignUpResponse } from "../../requests/auth/auth.types";
 import { StorageKeys } from "../../providers/localStorage/localStorage.types";
 import { useUserCartQuery } from "../../requests/carts/cart.query";
-
 import "./Header.css";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useCategoriesQuery } from "../../requests/category/category.query";
@@ -36,7 +35,6 @@ const Header: React.FC = () => {
   const userId = profile?.id;
   const { data: userData } = useUserCartQuery(userId!);
   const cartData = userData?.carts?.[0];
-
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const navigate = useNavigate();
@@ -69,6 +67,12 @@ const Header: React.FC = () => {
     navigate("/");
   };
 
+  const handleMenuLinkClick = () => {
+    if (window.innerWidth <= 768) {
+      setIsMenuOpen(false);
+    }
+  };
+
   return (
     <header>
       {profile && (
@@ -90,12 +94,14 @@ const Header: React.FC = () => {
         </div>
       )}
       <div className="header">
-        <div className="hamburger-menu-icon" onClick={toggleMenu}>
-          {isMenuOpen ? <FaTimes /> : <FaBars />}
+        <div className="left-section">
+          <div className="hamburger-menu-icon" onClick={toggleMenu}>
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
+          </div>
+          <Link className="product-link" to="/">
+            <h1 className="title">Ecommerce</h1>
+          </Link>
         </div>
-        <Link className="product-link" to={`/`}>
-          <h1 className="title">Ecommerce</h1>
-        </Link>
         <SearchBar
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -107,8 +113,10 @@ const Header: React.FC = () => {
             className="search-header-icon"
             onClick={toggleSearch}
           />
-
-          <Link to="/cart" className="cart-icon-container">
+          <Link
+            to={profile ? "/cart" : "/login"}
+            className="cart-icon-container"
+          >
             <FaShoppingCart className="mobile-cart-icon" />
             {cartData?.products && (
               <span className="mobile-cart-badge">
@@ -126,7 +134,6 @@ const Header: React.FC = () => {
               <FaHeart className="icon" />
             </div>
           )}
-
           <Link to="/cart" className="icon-container">
             <FaShoppingCart className="icon" />
             {cartData?.products && (
@@ -159,7 +166,7 @@ const Header: React.FC = () => {
             ))}
         </ul>
       </nav>
-      {isMenuOpen && <Menu />}
+      {isMenuOpen && <Menu handleLinkClick={handleMenuLinkClick} />}
     </header>
   );
 };

@@ -7,64 +7,58 @@
   color: white;
   padding: 10px 100px 0 100px;
 }
-
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .title {
   margin: 0;
   font-weight: 800;
   font-size: 24px;
 }
-
 .product-link {
   text-decoration: none;
   color: inherit;
 }
-
 .cart-containers {
   display: flex;
   align-items: center;
 }
-
 .icon-container {
   display: flex;
   align-items: center;
 }
-
 .cart-amount {
   margin-left: 5px;
   font-weight: 400;
   font-size: 16px;
 }
-
 .icon {
   font-size: 20px;
   cursor: pointer;
   margin-left: 15px;
   color: white;
 }
-
 .user-name {
   margin-left: 10px;
   font-weight: 400;
   font-size: 16px;
   color: white;
 }
-
 .mobile-icons {
   display: none;
 }
-
 .right-header-container {
   display: flex;
   justify-content: flex-end;
   padding: 10px 100px;
   background-color: #333d4c;
 }
-
 .navigation-links {
   display: flex;
   align-items: center;
 }
-
 .nav-link {
   padding: 1px 2px;
   text-decoration: none;
@@ -75,23 +69,19 @@
   color: white;
   font-size: 11px;
 }
-
 .nav-link:hover {
   background: #90cdf4;
   padding: 1px 3px;
   transform: translateX(4px);
 }
-
 .nav-link:focus {
   outline: 2px solid #90cdf4;
   outline-offset: 2px;
 }
-
 .categories-nav {
   background-color: #333d4c;
   padding: 20px 100px 10px 100px;
 }
-
 .categories-list {
   display: flex;
   justify-content: space-between;
@@ -99,13 +89,11 @@
   padding: 0;
   margin: 0;
 }
-
 .category-item {
   color: white;
   font-size: 14px;
   cursor: pointer;
 }
-
 .category-item:hover,
 .title:hover {
   text-decoration: none;
@@ -121,17 +109,14 @@
   border-radius: 8px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 .category-links:hover {
   background: #90cdf4;
   transform: translateX(4px);
 }
-
 .category-links:focus {
   outline: 2px solid #90cdf4;
   outline-offset: 2px;
 }
-
 @media (min-width: 768px) {
   .hamburger-menu-icon {
     display: none;
@@ -167,7 +152,6 @@
   }
   .title {
     font-size: 20px;
-    padding-left: 10px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -175,9 +159,9 @@
   .mobile-icons {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    flex-grow: 1;
-    padding-right: 15px;
+    justify-content: center;
+    gap: 15px;
+    margin-right: 10px;
   }
   .cart-containers,
   .categories-nav,
@@ -208,12 +192,10 @@
     cursor: pointer;
     color: white;
     margin-top: 3px;
-    margin-left: 10px;
   }
   .mobile-user-icon {
     font-size: 20px;
     cursor: pointer;
     color: white;
-    margin-left: 15px;
   }
 }

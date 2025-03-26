@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../Loading';
 import { iconMapping } from './menu.type';
 
-const Menu: React.FC = () => {
+const Menu: React.FC<{ handleLinkClick?: () => void }> = ({ handleLinkClick }) => {
   const { data: categories, isLoading } = useCategoriesQuery();
 
   if (isLoading) return <Loading/>;
@@ -24,6 +24,7 @@ const Menu: React.FC = () => {
                   to={`/category/${category?.slug}`} 
                   className="category-link"
                   aria-label={`${category?.name} kategorisine göz at`}
+                  onClick={handleLinkClick}
                 >
                   <div className="menu-content">
                     <span className="menu-icon" role="img">{icon}</span>

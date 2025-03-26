@@ -12,11 +12,13 @@ import { StorageKeys } from "../../providers/localStorage/localStorage.types";
 import { AuthSignUpResponse } from "../../requests/auth/auth.types";
 import { useTranslation } from "react-i18next";
 import LazyImage from "../../components/LazzyImage";
+import { useToast } from "../../components/Toast/ToastContext";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
   const productId = Number(id) || 0;
   const { t } = useTranslation();
+  const { addToast } = useToast();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [profile, setProfile] = useState<AuthSignUpResponse | null>(null);
   const { data: product, isLoading } = useSingleProductQuery(productId);
@@ -55,6 +57,12 @@ const ProductDetail: React.FC = () => {
         userId: profile?.id,
         products: [{ id: productId, quantity: 1 }],
       } as unknown as void);
+    } else {
+      addToast({
+        title: t("auth.authRequired"),
+        description: t("auth.authMesage"),
+        type: "error",
+      });
     }
   };
   const imageHeight = windowWidth >= 480 ? 420 : 340;

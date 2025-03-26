@@ -172,6 +172,8 @@
     "description": "You can see the full list of users from the Profile section",
     "loading": "Loading...",
     "welcome": "Welcome",
+    "authRequired": "You need to log in",
+    "authMesage": "Please log in to add the product to your cart.",
     "signInSuccessTitle": "Successfully Logged In",
     "signInSuccessDescription": "You have successfully logged into your account.",
     "signInErrorTitle": "Login Error",

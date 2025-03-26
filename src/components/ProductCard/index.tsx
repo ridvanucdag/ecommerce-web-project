@@ -9,9 +9,13 @@ import { formatPrice } from "../../utils/helpers";
 import { ProductCardProps } from "./ProductCart.type";
 import Button from "../Button";
 import LazyImage from "../LazzyImage";
+import { useToast } from "../Toast/ToastContext";
+import { useTranslation } from "react-i18next";
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { addToast } = useToast();
+  const { t } = useTranslation();
   const [profile, setProfile] = useState<AuthSignUpResponse | null>(null);
   const navigate = useNavigate();
   const { mutate } = useAddToCartMutation();
@@ -35,6 +39,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         userId: profile?.id,
         products: [{ id: product?.id, quantity: 1 }],
       } as unknown as void);
+    } else {
+      addToast({
+        title: t("auth.authRequired"),
+        description: t("auth.authMesage"),
+        type: "error",
+      });
     }
   };
 

@@ -166,6 +166,8 @@
     "description": "Profile kısmından tüm kullanıcı listesini görebilirsiniz",
     "loading": "Yükleniyor...",
     "welcome": "Hoş geldin",
+    "authRequired": "Giriş Yapmanız Gerekiyor",
+    "authMesage": "Ürünü sepete eklemek için lütfen giriş yapın.",
     "signInSuccessTitle": "Başarıyla Giriş Yapıldı",
     "signInSuccessDescription": "Hesabınıza başarıyla giriş yaptınız.",
     "signInErrorTitle": "Giriş Hatası",
