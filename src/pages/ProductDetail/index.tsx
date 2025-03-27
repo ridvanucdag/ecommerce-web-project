@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSingleProductQuery } from "../../requests/products/product.query";
-import Loading from "../../components/Loading";
 import "./ProductDetail.css";
 import { formatPrice } from "../../utils/helpers";
 import { StarRating } from "../../components/StarRating";
@@ -13,6 +12,7 @@ import { AuthSignUpResponse } from "../../requests/auth/auth.types";
 import { useTranslation } from "react-i18next";
 import LazyImage from "../../components/LazzyImage";
 import { useToast } from "../../components/Toast/ToastContext";
+import ProductDetailSkeleton from "../../components/Skeleton/ProductDetailSkeleton";
 
 const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id?: string }>();
@@ -47,7 +47,7 @@ const ProductDetail: React.FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <ProductDetailSkeleton />;
   if (!product) return <div className="error">{t("product.notFound")}</div>;
 
   const handleAddToCart = (e: React.MouseEvent) => {

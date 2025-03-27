@@ -8,10 +8,10 @@ import {
   useUpdateCartMutation,
   useDeleteFromCartMutation,
 } from "../../requests/carts/cart.mutation";
-import Loading from "../../components/Loading";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LazyImage from "../../components/LazzyImage";
+import CartSkeleton from "../../components/Skeleton/CartSkeleton";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Cart = () => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <CartSkeleton />;
   }
 
   if (!cart || cart.totalQuantity === 0) {

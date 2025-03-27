@@ -2,12 +2,12 @@ import React from "react";
 import { useProductQuery } from "../../requests/products/product.query";
 import ImageSlider from "../../components/ImageSlider";
 import ProductList from "../ProductList";
-import Loading from "../../components/Loading";
 import "./homepage.css";
 import Menu from "../../components/Menu";
 import { useCategoryProductsQuery } from "../../requests/category/category.query";
 import { Product } from "../../requests/products/product.types";
 import { useTranslation } from "react-i18next";
+import HomepageSkeleton from "../../components/Skeleton/HomepageSkeleton";
 
 const Homepage: React.FC = () => {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ const Homepage: React.FC = () => {
     isLoadingSportsAccessories &&
     isLoadingSmartphones
   ) {
-    return <Loading />;
+    return <HomepageSkeleton />;
   }
 
   const products = data?.products || [];

@@ -28,6 +28,7 @@
 .icon-container {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 .cart-amount {
   margin-left: 5px;

@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Product } from "../../requests/products/product.types";
 import { useCategoryProductsQuery } from "../../requests/category/category.query";
 import ProductCard from "../../components/ProductCard";
-import Loading from "../../components/Loading";
 import "./CategoryList.css";
 import Button from "../../components/Button";
 import { useTranslation } from "react-i18next";
+import CategoryListSkeleton from "../../components/Skeleton/CategoryListSkeleton";
 
 const CategoryList: React.FC = () => {
   const { categorySlug } = useParams();
@@ -22,7 +22,7 @@ const CategoryList: React.FC = () => {
   }, [categorySlug, navigate]);
 
   if (isLoading) {
-    return <Loading />;
+    return <CategoryListSkeleton />;
   }
 
   if (isError) {

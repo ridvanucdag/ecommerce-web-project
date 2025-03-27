@@ -1,0 +1,138 @@
+.skeleton-category-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px 100px;
+  }
+  
+  .skeleton-category-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .skeleton-title {
+    height: 40px;
+    width: 300px;
+    margin: 0 auto 1rem;
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+  
+  .skeleton-count {
+    height: 20px;
+    width: 100px;
+    margin: 0 auto;
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+  
+  .skeleton-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+  
+  .skeleton-product-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .skeleton-image {
+    height: 200px;
+    background: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .skeleton-card-content {
+    padding: 1rem;
+  }
+  
+  .skeleton-product-title {
+    height: 20px;
+    width: 80%;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+  
+  .skeleton-product-price {
+    height: 18px;
+    width: 60%;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .skeleton-product-rating {
+    height: 16px;
+    width: 100px;
+    background: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  .pulse {
+    background: linear-gradient(
+      90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+  
+  @media (max-width: 1024px) {
+    .skeleton-category-container {
+      padding: 10px 50px;
+    }
+    
+    .skeleton-category-grid {
+      gap: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .skeleton-category-container {
+      padding: 10px 20px;
+    }
+    
+    .skeleton-category-grid {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    
+    .skeleton-image {
+      height: 180px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .skeleton-title {
+      width: 200px;
+      height: 32px;
+    }
+    
+    .skeleton-category-grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    
+    .skeleton-image {
+      height: 150px;
+    }
+    
+    .skeleton-product-title {
+      height: 16px;
+    }
+  }

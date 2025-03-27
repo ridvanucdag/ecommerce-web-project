@@ -1,6 +1,5 @@
 import React from "react";
 import { FiFilter, FiStar, FiDollarSign, FiTag, FiBox } from "react-icons/fi";
-import Loading from "../../components/Loading";
 import ProductCard from "../../components/ProductCard";
 import "./searchPage.css";
 import Dropdown from "../../components/Dropdown";
@@ -8,6 +7,7 @@ import { useSearchFilters } from "../../hooks/useSearchFilters";
 import RadioButton from "../../components/RadioButton";
 import Button from "../../components/Button";
 import { useTranslation } from "react-i18next";
+import SearchSkeleton from "../../components/Skeleton/SearchSkeleton";
 
 const SearchPage: React.FC = () => {
       const { t } = useTranslation();
@@ -33,7 +33,7 @@ const SearchPage: React.FC = () => {
     sortOptions,
   } = useSearchFilters();
 
-  if (isLoading || isCategoryLoading) return <Loading />;
+  if (isLoading || isCategoryLoading) return <SearchSkeleton />;
 
   return (
     <div className="search-page">
